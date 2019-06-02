@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ComputersShop.Domain.Models;
+﻿using ComputersShop.Domain.Models;
 
 namespace ComputersShop.Domain.Objects
 {

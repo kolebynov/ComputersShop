@@ -2,7 +2,7 @@
 
 namespace ComputersShop.Shared
 {
-	public struct EnumValue<T>
+	public class EnumValue<T>
 		where T : Enum
 	{
 		public T Value { get; }

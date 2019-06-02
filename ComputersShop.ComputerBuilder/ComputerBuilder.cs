@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ComputersShop.ComputerBuilder.Abstractions;
 using ComputersShop.Domain.Data;
@@ -31,7 +29,12 @@ namespace ComputersShop.ComputerBuilder
 
 		public Task<IReadOnlyList<IComponent>> GetCompatibleComponents(EnumValue<ComponentType> componentType, int limit, int skip)
 		{
-			return _componentRepository.GetComponents(new ComponentFilter(), limit, skip);
+			if (componentType == null)
+			{
+				throw new ArgumentNullException(nameof(componentType));
+			}
+
+			return _componentRepository.GetComponents(BuildCompatibilityFilter(componentType.Value), limit, skip);
 		}
 
 		public Task WithComponent(IComponent component)
@@ -57,6 +60,11 @@ namespace ComputersShop.ComputerBuilder
 					throw new NotCompatibleException(c, component, result.CompatibilityReason);
 				}
 			}
+		}
+
+		private ComponentFilter BuildCompatibilityFilter(ComponentType componentType)
+		{
+
 		}
 	}
 }

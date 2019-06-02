@@ -7,7 +7,7 @@ namespace ComputersShop.Domain.Models.Abstractions
 	{
 		EnumValue<ComponentType> Type { get; }
 
-		IReadOnlyList<ComponentProperty> Properties { get; }
+		IReadOnlyList<ComponentPropertyValuePair> Properties { get; }
 
 		IReadOnlyList<ComponentCompatibility> Compatibilities { get; }
 	}

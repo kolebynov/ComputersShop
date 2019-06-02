@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ComputersShop.Domain.Models;
+using ComputersShop.Shared;
 
 namespace ComputersShop.Domain.Data
 {
 	public class ComponentFilter
 	{
-		public ComponentType Type { get; }
+		public EnumValue<ComponentType> Type { get; }
+
+		public IEnumerable<PropertyFilter> PropertyFilters { get; }
+
+		public ComponentFilter(EnumValue<ComponentType> type, IEnumerable<PropertyFilter> propertyFilters)
+		{
+			Type = type ?? throw new ArgumentNullException(nameof(type));
+			PropertyFilters = propertyFilters ?? throw new ArgumentNullException(nameof(propertyFilters));
+		}
 	}
 }
