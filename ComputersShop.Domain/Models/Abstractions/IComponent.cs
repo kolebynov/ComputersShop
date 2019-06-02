@@ -9,6 +9,6 @@ namespace ComputersShop.Domain.Models.Abstractions
 
 		IReadOnlyList<ComponentProperty> Properties { get; }
 
-		ICompatibilityCollection Compatibilities { get; }
+		IReadOnlyList<ComponentCompatibility> Compatibilities { get; }
 	}
 }

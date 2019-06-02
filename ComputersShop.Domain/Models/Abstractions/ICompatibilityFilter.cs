@@ -1,6 +1,6 @@
 ﻿namespace ComputersShop.Domain.Models.Abstractions
 {
-	public interface IComponentFilter
+	public interface ICompatibilityFilter
 	{
 		bool ApplyFilter(IComponent component);
 	}

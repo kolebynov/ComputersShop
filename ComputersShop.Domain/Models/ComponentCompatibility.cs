@@ -4,7 +4,7 @@ namespace ComputersShop.Domain.Models
 {
 	public class ComponentCompatibility
 	{
-		IComponentFilter CompatibilityFilter { get; }
+		ICompatibilityFilter CompatibilityFilter { get; }
 
 		int Count { get; }
 	}
