@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ComputersShop.ComputerBuilder.Abstractions;
-using ComputersShop.Domain.Data;
-using ComputersShop.Domain.Data.Abstractions;
 using ComputersShop.Domain.Exceptions;
-using ComputersShop.Domain.Extensions;
 using ComputersShop.Domain.Models;
 using ComputersShop.Domain.Models.Abstractions;
 using ComputersShop.Shared;
@@ -14,12 +11,12 @@ namespace ComputersShop.ComputerBuilder
 {
 	public class ComputerBuilder : IComputerBuilder
 	{
-		private readonly IComponentRepository _componentRepository;
 		private readonly List<IComponent> _components = new List<IComponent>();
+		private readonly ICompatibilityHelper _compatibilityHelper;
 
-		public ComputerBuilder(IComponentRepository componentRepository)
+		public ComputerBuilder(ICompatibilityHelper compatibilityHelper)
 		{
-			_componentRepository = componentRepository ?? throw new ArgumentNullException(nameof(componentRepository));
+			_compatibilityHelper = compatibilityHelper ?? throw new ArgumentNullException(nameof(compatibilityHelper));
 		}
 
 		public Task<Computer> Build()
@@ -34,7 +31,7 @@ namespace ComputersShop.ComputerBuilder
 				throw new ArgumentNullException(nameof(componentType));
 			}
 
-			return _componentRepository.GetComponents(BuildCompatibilityFilter(componentType.Value), limit, skip);
+			return _compatibilityHelper.GetCompatibleComponents(_components, componentType, limit, skip);
 		}
 
 		public Task WithComponent(IComponent component)
@@ -52,19 +49,11 @@ namespace ComputersShop.ComputerBuilder
 
 		private void CheckCompatibility(IComponent component)
 		{
-			foreach (var c in _components)
+			var result = _compatibilityHelper.IsComponentsCompatible(_components, component);
+			if (!result.IsCompatible)
 			{
-				var result = c.IsCompatibleWith(component);
-				if (!result.IsCompatible)
-				{
-					throw new NotCompatibleException(c, component, result.CompatibilityReason);
-				}
+				throw new NotCompatibleException(c, component, result.CompatibilityReason);
 			}
-		}
-
-		private ComponentFilter BuildCompatibilityFilter(ComponentType componentType)
-		{
-
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ComputersShop.Domain.Data;
 using ComputersShop.Shared;
 
 namespace ComputersShop.Domain.Models.Abstractions
@@ -9,6 +10,6 @@ namespace ComputersShop.Domain.Models.Abstractions
 
 		IReadOnlyList<ComponentPropertyValuePair> Properties { get; }
 
-		IReadOnlyList<ComponentCompatibility> Compatibilities { get; }
+		IReadOnlyList<ComponentFilter> Compatibilities { get; }
 	}
 }
