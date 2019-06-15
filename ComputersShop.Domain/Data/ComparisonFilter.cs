@@ -3,7 +3,7 @@ using ComputersShop.Shared;
 
 namespace ComputersShop.Domain.Data
 {
-	public class PropertyFilter
+	public class ComparisonFilter
 	{
 		public ComponentPropertyValuePair PropertyValuePair { get; }
 

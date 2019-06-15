@@ -2,5 +2,8 @@
 {
 	public enum PropertyValueType
 	{
+		String,
+		Integer,
+		Decimal
 	}
 }

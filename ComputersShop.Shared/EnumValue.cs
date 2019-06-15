@@ -16,5 +16,9 @@ namespace ComputersShop.Shared
 
 			Value = value;
 		}
+
+		public override string ToString() => Value.ToString();
+
+		public static implicit operator T(EnumValue<T> enumValue) => enumValue.Value;
 	}
 }
